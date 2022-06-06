@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+}
+
+.blog{
+  display: flex;
+  flex-wrap: wrap;
+  direction: row;
+  justify-content:center ;
+  align-items: center;
+
+}
