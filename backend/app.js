@@ -6,6 +6,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 require('express-async-errors')
 
+
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
@@ -22,10 +23,11 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connection to MongoDB:', error.message)
   })
 
+
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
-app.use(express.static('build'))
+
 
 app.use('/api/login', loginRouter)
 app.use('/api/blogs',userExtractor, blogsRouter)
@@ -36,11 +38,10 @@ if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testingRouter)
 }
 
-app.use(express.static(path.resolve(__dirname, 'build', 'index.html')));
-  
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-    });
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+}); 
 
 app.use(errorHandler)
 
