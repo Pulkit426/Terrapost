@@ -12,25 +12,34 @@ import CommentForm from "./CommentForm"
 
 
   const DetailedBlogPost = (props) => {
+    // const blogs = JSON.parse(window.localStorage.getItem('blogs'))
     const blogs = useSelector(state => state.blogs)
-    const user = useSelector(state => state.users)
+    const user = useSelector(state => state.user)
+    console.log("BLOGS & USER", blogs, user)
     const blogid = useParams().blogid
+    console.log("BLOGID", blogid)
   const detailedBlog = blogid
   ? blogs.find(blog => blog.id === blogid)
   : null
 
-  const isOriginalUser = user.username === detailedBlog.user.username
+  console.log(detailedBlog)
+  console.log("USER.USERNAME", user.username)
+  console.log("BLOG.USER.USERNAME", detailedBlog.user.username)
+  console.log(user.username, detailedBlog.user.username)
 
-  const cardHeight = isOriginalUser ? 275 : 230
+  const isOriginalUser = user.username === detailedBlog.user.username
+  console.log(isOriginalUser)
+
+  const cardHeight = isOriginalUser ? 300 : 250
 
   
 
     console.log("INSIDE DETAILED BLOG", blogs, detailedBlog)
-    return (
+    return ( 
       <div >
       <div style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
       
-        <Card elevation={5}  sx={{ height: cardHeight, width: 600, maxWidth: 800}} >
+        <Card elevation={5}  sx={{ height: cardHeight, width: 600, maxWidth: 800, overflow: "auto" }} >
           <CardContent>
           <Typography variant="h5" sx={{m:1, fontWeight: 700, fontSize: "28px"}} >
             {detailedBlog.title}
@@ -92,7 +101,7 @@ import CommentForm from "./CommentForm"
       <Box sx={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection:"column", mt: -2, ml: 2}}>
      <ul>
      {detailedBlog.comments.map(comment => <Comment comment={comment} />  )}  
-     </ul> 
+     </ul>
 </Box>
 </Box>
 

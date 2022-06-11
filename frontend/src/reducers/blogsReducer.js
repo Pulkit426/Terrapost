@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import blogService from '../services/blogs'
 import { setNotification } from "./notificationReducer";
 
-const blogsSlice = createSlice({
+
+const blogsSlice =  createSlice({
     name: 'blogs',
     initialState: [],
     reducers : {

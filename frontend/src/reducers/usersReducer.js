@@ -4,12 +4,17 @@ import loginService from '../services/login'
 import userService from '../services/users'
 import { setNotification } from './notificationReducer'
 
+const loggedInUserJSON = JSON.parse(
+    window.localStorage.getItem('loggedUser'),
+  )
+  
+  const initialState = loggedInUserJSON ? loggedInUserJSON : null
 
 const usersSlice = createSlice({
-    name: 'users',
-    initialState: null,
+    name: 'user',
+    initialState: initialState,
     reducers: {
-        setUsers(state,action){
+        setUser(state,action){
             console.log('INSIDE SETUSERS')
             state = action.payload
             return state
@@ -29,15 +34,15 @@ const usersSlice = createSlice({
     }
 })
 
-export const {setUsers, appendUser, setToken} = usersSlice.actions
+export const {setUser, appendUser, setToken} = usersSlice.actions
 
-export const initializeUsers = () => {
+export const initializeUser = () => {
     return async dispatch => {
     const loggedUser = window.localStorage.getItem("loggedUser");
     console.log("LOGGED USER", loggedUser)
     if (loggedUser) {
       const user = JSON.parse(loggedUser);
-      dispatch(setUsers(user))
+      dispatch(setUser(user))
       blogService.setToken(user.token);
     }
     }
@@ -49,7 +54,7 @@ export const login = (username, password) => {
       const userLogged = await loginService.login({ username, password });
       window.localStorage.setItem("loggedUser", JSON.stringify(userLogged));
       console.log("INSIDE LOGIN", userLogged)
-      dispatch(setUsers(userLogged))
+      dispatch(setUser(userLogged))
       dispatch(setToken(userLogged))
       dispatch(setNotification(`${userLogged.username} successfully logged in`))
     }catch(error){
@@ -72,7 +77,7 @@ export const signUp = (name, username, password) => {
 
 export const logout = () => {
     return async dispatch => {
-        dispatch(setUsers(null))
+        dispatch(setUser(null))
         blogService.setToken(null);
     }
 }

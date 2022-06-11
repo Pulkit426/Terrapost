@@ -1,15 +1,18 @@
 import React from "react"
 import { useParams, Link } from "react-router-dom"
 import { Typography,Card,Table, TableBody, TableHead, TableRow, TableCell } from "@mui/material"
+import usersService from '../services/users'
+import { useSelector } from "react-redux"
 
   const BlogsByUser = (props) => {
 
-    const userid = useParams().userid
+  const userid = useParams().userid
+  const allUsers = useSelector(state => state.allUsers)
   const detailedUser =  userid 
-  ? props.allUsers.filter(user => user.id === userid)
+  ? allUsers.filter(user => user.id === userid)
   : null
 
-    console.log("INSIDE BLOG BY USER",props.allUsers, detailedUser)
+    console.log("INSIDE BLOG BY USER",allUsers, detailedUser)
 
     if(!detailedUser){
       return <div>Waiting for fetch</div>
