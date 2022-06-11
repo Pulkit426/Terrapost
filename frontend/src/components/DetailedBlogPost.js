@@ -88,10 +88,10 @@ import CommentForm from "./CommentForm"
 
     <div> 
      
-     <Box sx={{ml:-13}} >
+     <Box sx={{ml:-16}} >
 
     <div style={{display:"flex", justifyContent: "center", alignItems: "center", color:"gray", marginLeft: "6rem"}}>
-        <NotesIcon sx={{mt:5, mr:1}} />
+        <NotesIcon sx={{mt:5, mr:1, ml: 0}} />
         <Typography variant="h4" align="center" component="div" sx={{m: 1, ml:0, mt: "3rem", fontSize: "20px", fontWeight: 700}}> 
            Comments   
         </Typography>

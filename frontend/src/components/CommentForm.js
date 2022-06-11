@@ -24,7 +24,7 @@ const CommentForm = (props) => {
 
 
         <TextField 
-        sx = {{m: "1rem", ml: "10rem", mb:"0.5rem", mr:"0.2rem", width: 560}}
+        sx = {{m: "1rem", ml: "10rem", mb:"0.5rem", mr:"0.2rem", width: 520}}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
